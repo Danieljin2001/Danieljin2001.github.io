@@ -1,0 +1,40 @@
+#cards {
+    display:block; 
+    width:13rem;
+    height:auto;
+  }
+
+#attack-card-info {
+  background-color: pink;
+  color: black;
+  font-size: 12px;
+  margin: 10px;
+  line-height: 12px;
+  white-space: normal;
+}
+
+#attack-card-outer {
+  display:block; 
+  width:13rem;
+  height:auto;
+  background-color: pink;
+
+}
+
+#defense-card-info {
+
+  background-color: lightskyblue;
+  color: black;
+  font-size: 12px;
+  margin: 10px;
+  line-height: 12px;
+  white-space: normal;
+}
+
+#defense-card-outer {
+  display:block; 
+  width:13rem;
+  height:auto;
+  background-color: lightskyblue;
+
+}

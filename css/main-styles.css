@@ -11,7 +11,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: 95%;
+    height: 97.5%;
     width: 100%;
     opacity: 0;
     transition: .5s ease;
@@ -23,7 +23,9 @@
     color: black;
     font-size: 12px;
     margin: 10px;
-    line-height: 3px;
+    line-height: 12px;
+    white-space: normal;
+
   }
   
   .card-container:hover .overlay {
