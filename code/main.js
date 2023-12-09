@@ -45,8 +45,8 @@ class Deck {
     setupDeck() {
 
         if(this.type == Type.Attack){
-            this.cards.push(new Card("../card-image/1-a-nuke.jpg", 1, this.type, "Wins against all (master cyber-defender)"));
-            this.cards.push(new Card("../card-image/1-a-nuke.jpg", 1, this.type, "Wins against all (master cyber-defender)"));
+            this.cards.push(new Card("../card-image/1-a-nuke.jpg", 1, this.type, "Wins against all (master cyber-hacker)"));
+            this.cards.push(new Card("../card-image/1-a-nuke.jpg", 1, this.type, "Wins against all (master cyber-hacker)"));
             this.cards.push(new Card("../card-image/2-a-firewallbypass.jpg", 2, this.type, "Allows attackers to gain unauthorized access to a network, potentially leading to a compromised system."));
             this.cards.push(new Card("../card-image/2-a-firewallbypass.jpg", 2, this.type, "Allows attackers to gain unauthorized access to a network, potentially leading to a compromised system."));
             this.cards.push(new Card("../card-image/3-a-basicmalware.jpg", 3, this.type, "Deployment of malicious software (malware) on a target system. Eg. Creeper Virus"));
@@ -72,8 +72,8 @@ class Deck {
             this.cards.push(new Card("../card-image/13-a-ddos.jpg", 13, this.type, "Cyber attack where multiple compromised computers are used to flood a target with a high volume of traffic, overwhelming its resources and rendering it inaccessible to legitimate users"));
             this.cards.push(new Card("../card-image/13-a-webddos.jpg", 13, this.type, "In a web-based DDoS attack, the goal is to saturate the target's network or web servers with traffic, making it challenging for the website to respond to legitimate user requests. "));
         } else {
-            this.cards.push(new Card("../card-image/1-d-nuke.jpg", 1, this.type, "Wins against all (master cyber-hacker)"));
-            this.cards.push(new Card("../card-image/1-d-nuke.jpg", 1, this.type, "Wins against all (master cyber-hacker)"));
+            this.cards.push(new Card("../card-image/1-d-nuke.jpg", 1, this.type, "Wins against all (master cyber-defender)"));
+            this.cards.push(new Card("../card-image/1-d-nuke.jpg", 1, this.type, "Wins against all (master cyber-defender)"));
             this.cards.push(new Card("../card-image/2-d-firewallfort.jpg", 2, this.type, "Firewall fortification with private, secure IP addresses involves the implementation of robust network security measures. This includes the deployment of firewalls configured to control and monitor traffic between internal and external networks, the use of private IP addressing to obscure internal device identities, and the establishment of secure communication channels such as Virtual Private Networks (VPNs) to safeguard data transmission."));
             this.cards.push(new Card("../card-image/2-d-firewallsoft.jpg", 2, this.type, "Firewall software like McAfee acts as a barrier between networks, controlling incoming and outgoing traffic. It monitors and blocks unauthorized access, preventing cyber threats. With customizable rules and threat intelligence, it fortifies network security, shielding against malware, intrusions, and other potential risks, enhancing overall cybersecurity posture."));
             this.cards.push(new Card("../card-image/3-d-antivirussoftware.jpg", 3, this.type, "Antivirus software safeguards systems by detecting, blocking, and removing malware. It scans files, emails, and web traffic, identifying malicious programs. With regular updates and heuristic analysis, it provides proactive defense, preventing infections, and maintaining the integrity and security of devices and networks against diverse cyber threats."));
@@ -147,12 +147,32 @@ class Player {
     constructor(name, deck){
         this.wins = 0;
         this.type = deck.getType();
-        this.name = name;
+        if(this.type == Type.Attack){
+            this.name = "Attacker";
+        } else {
+            this.name = "Defender";
+        }
         this.played = false;
         this.deck = deck;
         this.card = null;
         this.wonDeck = [];
+        this.tiedCards = [];
     }
+
+    addTiedCard(card){
+        this.tiedCards.push(card)
+    }
+
+    clearTiedCards(){
+        this.tiedCards = [];
+    }
+
+    wonTiedCards(){
+        for (let i = 0; i < this.tiedCards.length; i ++){
+            this.addWonCard(this.tiedCards[i]);
+        }
+    }
+
     newRound(){
         this.played = false;
     }
@@ -207,8 +227,8 @@ function setup(){
     PLAYERS.push(player2);
     
     
-    document.getElementById("attack-name").innerHTML = player1.getName() + " (Attacker)";
-    document.getElementById("defense-name").innerHTML = player2.getName() + " (Defender)";
+    document.getElementById("attack-name").innerHTML = player1.getName();
+    document.getElementById("defense-name").innerHTML = player2.getName();
     document.getElementById("attack-card-count").innerHTML = "Card count: " + player1.getDeck().getSize();
     document.getElementById("defense-card-count").innerHTML = "Card count: " + player2.getDeck().getSize();
     document.getElementById("attack-cards-won-count").innerHTML = "Cards won: " + player1.getWinningDeckSize();
@@ -340,19 +360,28 @@ function checkWin(){
         let player1Card = player1.getCard();
         let player2Card = player2.getCard();
     
-        if(player1Card.getLevel() > player2Card.getLevel()) {
+        if((player1Card.getLevel() == 1 && player2Card.getLevel() != 1) || player1Card.getLevel() > player2Card.getLevel()) {
             addToLog(player1.getName() + "'s card (level " + player1Card.getLevel() + ") beat " + player2.getName() + "'s card (level " + player2Card.getLevel() + ")");
-            addToLog(player1.getName() + " wins this round and win their card back!\n");
+            let numOfCardsWon = player1.tiedCards.length + 1;
+            addToLog(player1.getName() + " wins this round and wins "+numOfCardsWon+" card(s) back!\n");
+            player1.wonTiedCards();
             player1.addWonCard(player1Card);
-            
+            player1.clearTiedCards();
+            player2.clearTiedCards();
     
-        } else if(player1Card.getLevel() < player2Card.getLevel()) {
+        } else if((player2Card.getLevel() == 1 && player1Card.getLevel() != 1) ||player1Card.getLevel() < player2Card.getLevel()) {
             addToLog(player2.getName() + "'s card (level " + player2Card.getLevel() + ") beat " + player1.getName() + "'s card (level " + player1Card.getLevel() + ")");
-            addToLog(player2.getName() + " wins this round and win their card back!\n");
+            let numOfCardsWon = player2.tiedCards.length + 1;
+            addToLog(player1.getName() + " wins this round and wins "+numOfCardsWon+" card(s) back!\n");
+            player2.wonTiedCards();
             player2.addWonCard(player2Card);
+            player1.clearTiedCards();
+            player2.clearTiedCards();
         } else {
             addToLog(player1.getName() + "'s card (level " + player1Card.getLevel() + ") is equal to " + player2.getName() + "'s card (level " + player2Card.getLevel() + ")");
             addToLog("WAR!!!");
+            player1.addTiedCard(player1Card);
+            player2.addTiedCard(player2Card);
         }
 
         if(endGame()){

@@ -15,8 +15,8 @@ class Card {
 AttackCards = [];
 DefenseCards = [];
 
-AttackCards.push(new Card("../card-image/1-a-nuke.jpg", 1, "Attack", "Wins against all (master cyber-defender)"));
-AttackCards.push(new Card("../card-image/1-a-nuke.jpg", 1, "Attack", "Wins against all (master cyber-defender)"));
+AttackCards.push(new Card("../card-image/1-a-nuke.jpg", 1, "Attack", "Wins against all (master cyber-hacker)"));
+AttackCards.push(new Card("../card-image/1-a-nuke.jpg", 1, "Attack", "Wins against all (master cyber-hacker)"));
 AttackCards.push(new Card("../card-image/2-a-firewallbypass.jpg", 2, "Attack", "Allows attackers to gain unauthorized access to a network, potentially leading to a compromised system."));
 AttackCards.push(new Card("../card-image/2-a-firewallbypass.jpg", 2, "Attack", "Allows attackers to gain unauthorized access to a network, potentially leading to a compromised system."));
 AttackCards.push(new Card("../card-image/3-a-basicmalware.jpg", 3, "Attack", "Deployment of malicious software (malware) on a target system. Eg. Creeper Virus"));
@@ -42,8 +42,8 @@ AttackCards.push(new Card("../card-image/12-a-ransomware.jpg", 12, "Attack", "Ty
 AttackCards.push(new Card("../card-image/13-a-ddos.jpg", 13, "Attack", "Cyber attack where multiple compromised computers are used to flood a target with a high volume of traffic, overwhelming its resources and rendering it inaccessible to legitimate users"));
 AttackCards.push(new Card("../card-image/13-a-webddos.jpg", 13, "Attack", "In a web-based DDoS attack, the goal is to saturate the target's network or web servers with traffic, making it challenging for the website to respond to legitimate user requests. "));
 
-DefenseCards.push(new Card("../card-image/1-d-nuke.jpg", 1, "Defense", "Wins against all (master cyber-hacker)"));
-DefenseCards.push(new Card("../card-image/1-d-nuke.jpg", 1, "Defense", "Wins against all (master cyber-hacker)"));
+DefenseCards.push(new Card("../card-image/1-d-nuke.jpg", 1, "Defense", "Wins against all (master cyber-defender)"));
+DefenseCards.push(new Card("../card-image/1-d-nuke.jpg", 1, "Defense", "Wins against all (master cyber-defender)"));
 DefenseCards.push(new Card("../card-image/2-d-firewallfort.jpg", 2, "Defense", "Firewall fortification with private, secure IP addresses involves the implementation of robust network security measures. This includes the deployment of firewalls configured to control and monitor traffic between internal and external networks, the use of private IP addressing to obscure internal device identities, and the establishment of secure communication channels such as Virtual Private Networks (VPNs) to safeguard data transmission."));
 DefenseCards.push(new Card("../card-image/2-d-firewallsoft.jpg", 2, "Defense", "Firewall software like McAfee acts as a barrier between networks, controlling incoming and outgoing traffic. It monitors and blocks unauthorized access, preventing cyber threats. With customizable rules and threat intelligence, it fortifies network security, shielding against malware, intrusions, and other potential risks, enhancing overall cybersecurity posture."));
 DefenseCards.push(new Card("../card-image/3-d-antivirussoftware.jpg", 3, "Defense", "Antivirus software safeguards systems by detecting, blocking, and removing malware. It scans files, emails, and web traffic, identifying malicious programs. With regular updates and heuristic analysis, it provides proactive defense, preventing infections, and maintaining the integrity and security of devices and networks against diverse cyber threats."));
